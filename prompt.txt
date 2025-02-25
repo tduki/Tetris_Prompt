@@ -1,0 +1,168 @@
+crée moi le jeu : 
+Cahier des Charges - Développement d'un jeu Tetris
+1. Présentation du projet
+
+Objectif : Développer un jeu Tetris jouable dans un navigateur web
+Technologies : HTML5, CSS3, JavaScript (vanilla)
+Public cible : Tout public, joueurs occasionnels
+
+2. Fonctionnalités principales
+2.1 Mécaniques de jeu essentielles
+
+Zone de jeu de 10x20 cases
+7 types de pièces (tetrominos) : I, O, T, L, J, S, Z
+Rotation des pièces (sens horaire)
+Déplacement latéral des pièces
+Descente automatique des pièces
+Descente rapide (soft drop)
+Chute instantanée (hard drop)
+Système de collision
+Système de complétion des lignes
+
+2.2 Interface utilisateur
+
+Affichage principal du jeu
+Zone d'aperçu de la prochaine pièce
+Affichage du score actuel
+Affichage du niveau
+Affichage du nombre de lignes complétées
+Boutons de contrôle (Nouvelle partie, Pause)
+Tableau des meilleurs scores
+
+2.3 Système de score
+
+Points par pièce placée
+Points bonus pour les lignes complétées
+
+1 ligne = 100 points
+2 lignes = 300 points
+3 lignes = 500 points
+4 lignes = 800 points
+
+
+Multiplicateur de score basé sur le niveau
+
+3. Spécifications techniques
+3.1 Structure des données
+
+Matrice pour le plateau de jeu
+Objets pour les pièces avec propriétés :
+
+Forme
+Position
+Couleur
+État de rotation
+
+
+
+3.2 Stockage
+
+Utilisation du localStorage pour :
+
+Tableau des meilleurs scores
+Sauvegarde de la dernière partie
+Préférences utilisateur
+
+
+
+3.3 Performances
+
+60 FPS minimum
+Temps de réponse < 16ms pour les contrôles
+Optimisation pour mobile
+
+4. Interface utilisateur
+4.1 Design
+
+Style minimaliste et moderne
+Palette de couleurs distincte pour chaque pièce
+Interface responsive
+Grille de jeu claire et visible
+Effets visuels pour :
+
+Disparition des lignes
+Game Over
+Niveau supérieur
+
+
+
+4.2 Contrôles
+
+Clavier :
+
+Flèches gauche/droite : déplacement
+Flèche haut : rotation
+Flèche bas : descente rapide
+Espace : chute instantanée
+P : pause
+
+
+Support tactile pour mobile :
+
+Swipe gauche/droite : déplacement
+Tap : rotation
+Swipe bas : descente rapide
+Double tap : chute instantanée
+
+
+
+5. Fonctionnalités additionnelles
+5.1 Système de niveaux
+
+Augmentation de la vitesse tous les 10 lignes
+Maximum 15 niveaux
+Vitesse initiale : 1 case/seconde
+Vitesse maximale : 20 cases/seconde
+
+5.2 Tableau des scores
+
+Stockage des 10 meilleurs scores
+Affichage : rang, score, niveau atteint, date
+Système de pseudonyme
+
+5.3 Options de jeu
+
+Musique on/off
+Effets sonores on/off
+Contrôles personnalisables
+Mode nuit/jour
+
+6. Tests requis
+
+Tests de collision
+Tests de rotation près des murs
+Tests de performance
+Tests de compatibilité navigateur
+Tests responsive
+Tests des contrôles tactiles
+
+7. Livrables attendus
+
+Code source commenté
+Documentation technique
+Guide d'utilisation
+Fichiers minifiés pour la production
+Tests unitaires
+
+8. Contraintes techniques
+
+Pas de frameworks JavaScript
+Compatible avec les navigateurs modernes (dernières versions de Chrome, Firefox, Safari, Edge)
+Responsive de 320px à 1920px
+Temps de chargement < 2 secondes
+
+9. Critères de qualité
+
+Code modulaire et maintenable
+Respect des standards W3C
+Pas de fuites mémoire
+Fluidité du gameplay
+Interface intuitive
+
+-----------------------------------
+crée moi un systeme d'audio
+--------------------
+crée moi un systeme de thème
+
+---------------------------- 
+améliore l'ia pour qu'elle soit réaliste et pas trop forte 
