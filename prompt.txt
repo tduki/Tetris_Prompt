@@ -1,3 +1,10 @@
+## Claude:
+fait moi le cahier des charges pour que je le donne à une autre ia
+
+
+
+## Cursor :
+
 crée moi le jeu : 
 Cahier des Charges - Développement d'un jeu Tetris
 1. Présentation du projet
@@ -160,9 +167,25 @@ Fluidité du gameplay
 Interface intuitive
 
 -----------------------------------
+intègre moi une ia qui joue en face
+-----------------------------------
 crée moi un systeme d'audio
 --------------------
 crée moi un systeme de thème
 
 ---------------------------- 
 améliore l'ia pour qu'elle soit réaliste et pas trop forte 
+------------------------------
+debug moi la musique
+------------------------------
+fait en sorte que j'ai un dashboard de fin de jeu
+-----------------------------
+rajoute un jolie titre
+----------------------------
+fait en sorte que j'ai plus de bug coté client 
+----------------------------
+rajoute par defaut le thème néon
+---------------------------
+fait en sorte que j'ai un bon coté client
+------------------------
+voilà parfait, maintenant assure toi que je n'ai aucun bug 
