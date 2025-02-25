@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris VS IA - Le Duel Ultime</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            margin: 0;
+            background: linear-gradient(to right, #000, #333, #000);
+            border-bottom: 3px solid #ff5252;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .game-title {
+            font-size: 3.5rem;
+            color: #ff5252;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .title-icon {
+            height: 60px;
+            margin: 0 15px;
+            filter: drop-shadow(0 0 5px #ff5252);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff5252, 0 0 20px #ff5252;
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff5252, 0 0 40px #ff5252;
+            }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .game-container {
+            margin-top: 20px;
+            padding: 0 20px;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="game-title">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBmaWxsPSIjZmY1MjUyIj48cGF0aCBkPSJNMCAwaDEyOHYxMjhIMFYwem0xMjggMTI4aDEyOHYxMjhIMTI4VjEyOHptMTI4LTEyOGgxMjh2MTI4SDI1NlYwem0xMjggMTI4aDEyOHYxMjhIMzg0VjEyOHpNMCAxMjhoMTI4djEyOEgwVjEyOHptMjU2IDEyOGgxMjh2MTI4SDI1NlYyNTZ6bTEyOC0xMjhoMTI4djEyOEgzODRWMTI4ek0wIDI1NmgxMjh2MTI4SDBWMjU2em0xMjggMTI4aDEyOHYxMjhIMTI4VjM4NHptMTI4LTEyOGgxMjh2MTI4SDI1NlYyNTZ6Ii8+PC9zdmc+" class="title-icon" alt="Tetris Icon">
+            TETRIS VS IA - LE DUEL ULTIME
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBmaWxsPSIjZmY1MjUyIj48cGF0aCBkPSJNMzg0IDMyYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyLTMyIDMyLTMyIDMyIDE0LjMgMzIgMzJ6bTY0IDY0YzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyLTMyIDMyLTMyIDMyIDE0LjMgMzIgMzJ6bS02NCAxMjhjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMzItMzIgMzItMzIgMzIgMTQuMyAzMiAzMnptLTEyOCAwYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyLTMyIDMyLTMyIDMyIDE0LjMgMzIgMzJ6bS0xMjgtNjRjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMzItMzIgMzItMzIgMzIgMTQuMyAzMiAzMnptNjQtNjRjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMzItMzIgMzItMzIgMzIgMTQuMyAzMiAzMnptMTI4IDMyYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyLTMyIDMyLTMyIDMyIDE0LjMgMzIgMzJ6bS0xMjggNjRjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMzItMzIgMzItMzIgMzIgMTQuMyAzMiAzMnptMCAxMjhjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMzItMzIgMzItMzIgMzIgMTQuMyAzMiAzMnptNjQgNjRjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMzItMzIgMzItMzIgMzIgMTQuMyAzMiAzMnptNjQtMTkyYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyLTMyIDMyLTMyIDMyIDE0LjMgMzIgMzJ6Ii8+PC9zdmc+" class="title-icon" alt="AI Icon">
+        </h1>
+    </header>
+    
+    <div class="game-container">
+        <!-- Joueur Humain -->
+        <div class="player-section">
+            <div class="game-info">
+                <div class="score-container">
+                    <h2>Joueur</h2>
+                    <h3>Score: <span id="playerScore">0</span></h3>
+                    <h3>Niveau: <span id="playerLevel">1</span></h3>
+                    <h3>Lignes: <span id="playerLines">0</span></h3>
+                </div>
+                <div class="next-piece">
+                    <h3>Suivant:</h3>
+                    <canvas id="playerNextPiece" width="100" height="100"></canvas>
+                </div>
+            </div>
+            <canvas id="playerBoard" width="300" height="600"></canvas>
+        </div>
+
+        <!-- Section centrale -->
+        <div class="center-section">
+            <div class="game-controls">
+                <button id="startBtn">Nouvelle Partie</button>
+                <button id="pauseBtn">Pause</button>
+            </div>
+            <div class="special-events">
+                <div id="eventDisplay" class="event-box hidden">
+                    <!-- Affichage des événements spéciaux -->
+                </div>
+            </div>
+            <div class="mobile-controls">
+                <button id="leftBtn">←</button>
+                <button id="rightBtn">→</button>
+                <button id="rotateBtn">↻</button>
+                <button id="dropBtn">↓</button>
+            </div>
+            <div class="game-settings">
+                <button id="musicToggle">🎵 Musique</button>
+                <button id="soundToggle">🔊 Sons</button>
+                <div class="theme-selector">
+                    <label for="theme">Thème:</label>
+                    <select id="theme">
+                        <option value="classic">Classique</option>
+                        <option value="neon">Néon</option>
+                        <option value="retro">Rétro</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- IA -->
+        <div class="player-section">
+            <div class="game-info">
+                <div class="score-container">
+                    <h2>IA</h2>
+                    <h3>Score: <span id="aiScore">0</span></h3>
+                    <h3>Niveau: <span id="aiLevel">1</span></h3>
+                    <h3>Lignes: <span id="aiLines">0</span></h3>
+                </div>
+                <div class="next-piece">
+                    <h3>Suivant:</h3>
+                    <canvas id="aiNextPiece" width="100" height="100"></canvas>
+                </div>
+            </div>
+            <canvas id="aiBoard" width="300" height="600"></canvas>
+        </div>
+    </div>
+
+    <script src="js/tetromino.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/score.js"></script>
+    <script src="js/controls.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/rules.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html> 

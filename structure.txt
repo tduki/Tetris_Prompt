@@ -1,0 +1,18 @@
+/tetris
+  ├── index.html
+  ├── index.js  
+  ├── css/
+  │   ├── style.css
+  │   └── dashboard.css
+  ├── js/
+  │   ├── game.js
+  │   ├── tetromino.js
+  │   ├── board.js
+  │   ├── score.js
+  │   ├── controls.js
+  │   ├── dashboard.js
+  │   ├── ai.js
+  │   └── rules.js
+  
+  └── assets/
+      └── sounds/ 
